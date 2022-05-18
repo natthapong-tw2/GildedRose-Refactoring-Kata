@@ -53,4 +53,46 @@ describe("Gilded Rose", function () {
       expect(items[0].quality).toBe(49);
     });
   });
+  describe("Name equal backStage", () => {
+    it("sellIn more than 11 and quality less than 50 after increase by one", () => {
+      const item = new Item(backStage, 12, 48);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(11);
+      expect(items[0].quality).toBe(49);
+    });
+    it("sellIn less than 11 and quality eqaul 50 after increase by one", () => {
+      const item = new Item(backStage, 10, 49);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(9);
+      expect(items[0].quality).toBe(50);
+    });
+    it("sellIn less than 11 and quality less than 50 after increase by one", () => {
+      const item = new Item(backStage, 10, 48);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(9);
+      expect(items[0].quality).toBe(50);
+    });
+    it("sellIn less than 6 and quality less than 50 after increase by two", () => {
+      const item = new Item(backStage, 5, 47);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(4);
+      expect(items[0].quality).toBe(50);
+    });
+    it("sellIn less than 6 and quality equal 50 after increase by two", () => {
+      const item = new Item(backStage, 5, 48);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(4);
+      expect(items[0].quality).toBe(50);
+    });
+  });
 });
