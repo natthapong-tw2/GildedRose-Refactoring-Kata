@@ -24,12 +24,21 @@ describe("Gilded Rose", function () {
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toBe(1);
     });
-    it("should reduce the sellIn, when the name not equal sulfuras", () => {
-      const item = new Item("bar", 0, 0);
+    it("should reduce sellIn by one and reduce quality by two, when sellIn less than one, when the name not equal sulfuras", () => {
+      const item = new Item("bar", 0, 49);
 
       const gildedRose = new Shop([item]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(-1);
+      expect(items[0].quality).toBe(47);
+    });
+    it("should reduce sellIn by one and reduce quality by one, when sellIn more than one, when the name not equal sulfuras", () => {
+      const item = new Item("bar", 1, 49);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(0);
+      expect(items[0].quality).toBe(48);
     });
   });
 });
