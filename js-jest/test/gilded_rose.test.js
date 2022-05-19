@@ -26,11 +26,11 @@ describe("Shop", function() {
       const gildedRose = new Shop([new Item("foo", 0, 0)]);
       expect(gildedRose.items[0].name).toBe("foo");
     });
-  });
 
-  it("should not throw when run 'updateQuality' with one item in the store", function() {
-    const gildedRose = new Shop([new Item("foo", 0, 0)]);
-    expect(() => gildedRose.updateQuality()).not.toThrow();
+    it("should not throw when run 'updateQuality' with one item in the store", function() {
+      const gildedRose = new Shop([new Item("foo", 0, 0)]);
+      expect(() => gildedRose.updateQuality()).not.toThrow();
+    });
   });
 
   describe("Regular Item", () => {
@@ -73,4 +73,12 @@ describe("Shop", function() {
     });
   });
 
+  describe("Aged Brie", () => {
+    it("'quality' should increase by 1 when 'sellIn' > 0", function() {
+      const gildedRose = new Shop([new Item("Aged Brie", 1, 0)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(0);
+      expect(items[0].quality).toBe(1);
+    });
+  });
 });
