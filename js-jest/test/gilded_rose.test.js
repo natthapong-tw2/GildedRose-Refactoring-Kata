@@ -21,9 +21,11 @@ describe("Item", function() {
 });
 
 describe("Shop", function() {
-  it("should add an item to the store with name 'foo'", function() {
-    const gildedRose = new Shop([new Item("foo", 0, 0)]);
-    expect(gildedRose.items[0].name).toBe("foo");
+  describe("General", () => {
+    it("should add an item to the store with name 'foo'", function() {
+      const gildedRose = new Shop([new Item("foo", 0, 0)]);
+      expect(gildedRose.items[0].name).toBe("foo");
+    });
   });
 
   it("should not throw when run 'updateQuality' with one item in the store", function() {
@@ -31,7 +33,7 @@ describe("Shop", function() {
     expect(() => gildedRose.updateQuality()).not.toThrow();
   });
 
-  describe("regular item", () => {
+  describe("Regular Item", () => {
     it("'sellIn' and 'quality' should both decrease by 1 if 'sellIn' > 0 and 'quality' > 0", function() {
       const gildedRose = new Shop([new Item("foo", 1, 1)]);
       const items = gildedRose.updateQuality();
@@ -46,7 +48,7 @@ describe("Shop", function() {
       expect(items[0].quality).toBe(0);
     });
 
-    it("'sellIn' should be able to go below 0", function() {
+    it("'sellIn' should decrease below 0", function() {
       const gildedRose = new Shop([new Item("foo", 1, 0)]);
       gildedRose.updateQuality();
       const items = gildedRose.updateQuality();
@@ -54,20 +56,21 @@ describe("Shop", function() {
       expect(items[0].quality).toBe(0);
     });
 
-    // it("'sellIn' should be able to go below 0, but 'quality' should not decrease below 0", function() {
-    //   const gildedRose = new Shop([new Item("foo", 1, 0)]);
-    //   gildedRose.updateQuality();
-    //   const items = gildedRose.updateQuality();
-    //   expect(items[0].sellIn).toBe(-1);
-    //   expect(items[0].quality).toBe(0);
-    // });
+    it("'sellIn' should decrease below 0, but 'quality' should not decrease below 0", function() {
+      const gildedRose = new Shop([new Item("foo", 1, 0)]);
+      gildedRose.updateQuality();
+      gildedRose.updateQuality();
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-2);
+      expect(items[0].quality).toBe(0);
+    });
 
-
-    // it("'sellIn' < 0 should decrease 'quality' by 2 if 'quality' > 0", function() {
-    //   const gildedRose = new Shop([new Item("foo", 0, 0)]);
-    //   const items = gildedRose.updateQuality();
-    //   expect(items[0].sellIn).toBe(0);
-    //   expect(items[0].quality).toBe(0);
-    // });
+    it("when 'sellIn', < 0 'quality' should decrease by 2 each day", function() {
+      const gildedRose = new Shop([new Item("foo", 0, 10)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-1);
+      expect(items[0].quality).toBe(8);
+    });
   });
+
 });
