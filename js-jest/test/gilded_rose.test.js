@@ -74,11 +74,29 @@ describe("Shop", function() {
   });
 
   describe("Aged Brie", () => {
-    it("'quality' should increase by 1 when 'sellIn' > 0", function() {
+    it("'quality' should increase by 1", function() {
       const gildedRose = new Shop([new Item("Aged Brie", 1, 0)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(0);
       expect(items[0].quality).toBe(1);
+    });
+
+    // TODO: change test name 
+    it("'quality' should increase by 2 even when 'sellIn' < 0", function() {
+      const gildedRose = new Shop([new Item("Aged Brie", 0, 0)]);
+      gildedRose.updateQuality();
+      gildedRose.updateQuality();
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-3);
+      expect(items[0].quality).toBe(3);
+    });
+
+    it("'quality' should not increase above 50", function() {
+      const gildedRose = new Shop([new Item("Aged Brie", 1, 49)]);
+      gildedRose.updateQuality();
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-1);
+      expect(items[0].quality).toBe(50);
     });
   });
 });
