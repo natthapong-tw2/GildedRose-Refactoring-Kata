@@ -95,4 +95,30 @@ describe("Gilded Rose", function () {
       expect(items[0].quality).toBe(50);
     });
   });
+  describe("Name equal agedBrie", () => {
+    it("quality should increase by two if quality equal 49 and sellIn less than 0", () => {
+      const item = new Item(agedBrie, -1, 49);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-2);
+      expect(items[0].quality).toBe(50);
+    });
+    it("quality should increase by two if quality less than 50 and sellIn less than 0", () => {
+      const item = new Item(agedBrie, -1, 5);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-2);
+      expect(items[0].quality).toBe(7);
+    });
+    it("quality should increase by two if quality greater than 50 and sellIn less than 0", () => {
+      const item = new Item(agedBrie, -1, 50);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-2);
+      expect(items[0].quality).toBe(50);
+    });
+  });
 });
