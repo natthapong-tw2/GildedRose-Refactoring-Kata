@@ -44,7 +44,7 @@ describe("Gilded Rose", function () {
     });
   });
   describe("Name equal sulfuras", () => {
-    it("quality should not change", () => {
+    it("quality and sellIn should not change", () => {
       const item = new Item(sulfuras, -1, 49);
 
       const gildedRose = new Shop([item]);
@@ -54,49 +54,58 @@ describe("Gilded Rose", function () {
     });
   });
   describe("Name equal backStage", () => {
-    it("sellIn more than 11 and quality less than 50 after increase by one", () => {
+    it("quality should increase one, when sellIn more than 11 and quality less than 50", () => {
       const item = new Item(backStage, 12, 48);
 
       const gildedRose = new Shop([item]);
       const items = gildedRose.updateQuality();
-      expect(items[0].sellIn).toBe(11);
       expect(items[0].quality).toBe(49);
     });
-    it("sellIn less than 11 and quality eqaul 50 after increase by one", () => {
+    it("quality should increase one, when sellIn less than 11 and quality eqaul 49", () => {
       const item = new Item(backStage, 10, 49);
 
       const gildedRose = new Shop([item]);
       const items = gildedRose.updateQuality();
-      expect(items[0].sellIn).toBe(9);
       expect(items[0].quality).toBe(50);
     });
-    it("sellIn less than 11 and quality less than 50 after increase by one", () => {
+    it("quality should increase two, when sellIn less than 11 and quality less than 50 after increase by one", () => {
       const item = new Item(backStage, 10, 48);
 
       const gildedRose = new Shop([item]);
       const items = gildedRose.updateQuality();
-      expect(items[0].sellIn).toBe(9);
       expect(items[0].quality).toBe(50);
     });
-    it("sellIn less than 6 and quality less than 50 after increase by two", () => {
+    it("quality should increase three, when sellIn less than 6 and quality less than 50 after increase by two", () => {
       const item = new Item(backStage, 5, 47);
 
       const gildedRose = new Shop([item]);
       const items = gildedRose.updateQuality();
-      expect(items[0].sellIn).toBe(4);
       expect(items[0].quality).toBe(50);
     });
-    it("sellIn less than 6 and quality equal 50 after increase by two", () => {
+    it("quality should increase two, when sellIn less than 6 and quality equal 50 after increase by two", () => {
       const item = new Item(backStage, 5, 48);
 
       const gildedRose = new Shop([item]);
       const items = gildedRose.updateQuality();
-      expect(items[0].sellIn).toBe(4);
       expect(items[0].quality).toBe(50);
+    });
+    it("quality should equal zero, when sellIn less than 0", () => {
+      const item = new Item(backStage, -1, 48);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(0);
+    });
+    it("quality should equal zero, when sellIn equal 0", () => {
+      const item = new Item(backStage, 0, 50);
+
+      const gildedRose = new Shop([item]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(0);
     });
   });
   describe("Name equal agedBrie", () => {
-    it("quality should increase by two if quality equal 49 and sellIn less than 0", () => {
+    it("quality should increase by two, when quality equal 49 and sellIn less than 0", () => {
       const item = new Item(agedBrie, -1, 49);
 
       const gildedRose = new Shop([item]);
@@ -104,7 +113,7 @@ describe("Gilded Rose", function () {
       expect(items[0].sellIn).toBe(-2);
       expect(items[0].quality).toBe(50);
     });
-    it("quality should increase by two if quality less than 50 and sellIn less than 0", () => {
+    it("quality should increase by two, when quality less than 50 and sellIn less than 0", () => {
       const item = new Item(agedBrie, -1, 5);
 
       const gildedRose = new Shop([item]);
@@ -112,7 +121,7 @@ describe("Gilded Rose", function () {
       expect(items[0].sellIn).toBe(-2);
       expect(items[0].quality).toBe(7);
     });
-    it("quality should increase by two if quality greater than 50 and sellIn less than 0", () => {
+    it("quality should increase by two, when quality greater than 50 and sellIn less than 0", () => {
       const item = new Item(agedBrie, -1, 50);
 
       const gildedRose = new Shop([item]);
