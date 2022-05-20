@@ -21,3 +21,11 @@ describe("Aged brie", () => {
     expect(items[0]).toEqual({ name: "Aged Brie", sellIn: -1, quality: 2});
   })
 })
+
+describe("Sulfuras, Hand of Ragnaros", () => {
+  it('should never be sold or decrease in quality', () => {
+    const sulfuras = new Shop([new Item("Sulfuras, Hand of Ragnaros", 1, 1)]);
+    const items = sulfuras.updateQuality();
+    expect(items[0]).toEqual({ name: "Sulfuras, Hand of Ragnaros", sellIn: 1, quality: 1});
+  })
+})
