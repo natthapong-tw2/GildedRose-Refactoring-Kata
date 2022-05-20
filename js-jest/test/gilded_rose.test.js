@@ -21,7 +21,7 @@ describe("Aged brie", () => {
     expect(items[0]).toEqual({ name: "Aged Brie", sellIn: 0, quality: 1});
   })
 
-  it('should decrease the quality twice if the sell date was already passed', () => {
+  it('should increase the quality twice if the sell date was already passed', () => {
     const ageBrie = new Shop([new Item("Aged Brie", 0, 0)]);
     const items = ageBrie.updateQuality();
     expect(items[0]).toEqual({ name: "Aged Brie", sellIn: -1, quality: 2});
@@ -56,7 +56,7 @@ describe("Backstage passes to a TAFKAL80ETC concert", () => {
   })
 
   it("should have zero quality if the performance already end", () => {
-    const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 1)]);
+    const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 5)]);
     const items = backstage.updateQuality();
     expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: -1, quality: 0});
   })
