@@ -93,6 +93,25 @@ describe("Items quality is never negative", function() {
   });
 });
 
+describe("Items sellIn gets updated", function() {
+  describe("Sulfuras sellIn gets updated correctly", function() {
+    it("Sulfuras sellIn does not get updated", function() {
+      const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 10, 80)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(10);
+    })
+  })
+  describe("Non-Sulfuras items sellIn should get updated by -1", function() {
+    const cases = [["Aged Brie", 10, 10], ["Backstage passes to a TAFKAL80ETC concert", 10, 10], ["foo", 10, 10]];
+
+    it.each(cases)("All non-Sulfuras items sellIn should -1", function(name, sellIn, quality) {
+      const gildedRose = new Shop([new Item(name, sellIn, quality)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(9);
+    })
+  })
+})
+
 
 // filter by name, then quality, then sellIn
 
