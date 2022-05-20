@@ -167,20 +167,36 @@ describe("Shop", function() {
       expect(items[0].quality).toBe(0);
     });
 
-    // it("'quality' should always be ('sellIn' - 10) + 10 + 15 when 'sellIn' reaches 0", function() {
-    //   const sellIn = 100;
-    //   const items = Array(sellIn)
-    //     .fill(null)
-    //     .reduce(
-    //       gildedRose => gildedRose.updateQuality(),
-    //       new Shop([
-    //         new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, 0)
-    //       ])
-    //     );
+    // unsure if this test is necessary as it's covered by previous tests
+    it("'quality' should always be ('sellIn' - 10) + 10 + 15 when 'sellIn' reaches 0 ", function() {
+      const sellIn = 20;
+      const gildedRose = new Shop([
+        new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, 0)
+      ]);
 
-    //   expect(items[0].sellIn).toBe(0);
-    //   expect(items[0].quality).toBe(115);
-    // });
-    //
+      let items;
+      for (let i = 0; i < sellIn; i++) {
+        items = gildedRose.updateQuality();
+      }
+
+      expect(items[0].sellIn).toBe(0);
+      expect(items[0].quality).toBe(sellIn + 15);
+    });
+
+    // unsure if this test is necessary as it's covered by previous tests
+    it("'quality' should never increase above 50", function() {
+      const sellIn = 100;
+      const gildedRose = new Shop([
+        new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, 0)
+      ]);
+
+      let items;
+      for (let i = 0; i < sellIn; i++) {
+        items = gildedRose.updateQuality();
+      }
+
+      expect(items[0].sellIn).toBe(0);
+      expect(items[0].quality).toBe(50);
+    });
   });
 });
