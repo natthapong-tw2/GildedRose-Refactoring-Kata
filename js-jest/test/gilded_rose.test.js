@@ -53,12 +53,18 @@ describe("Backstage passes to a TAFKAL80ETC concert", () => {
     const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 0)]);
     const items = backstage.updateQuality();
     expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 4, quality: 3});
-  })
+  });
 
-  it("should increase quality by two as the date has approaches 10 days or less", () => {
-    const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 0)]);
-    const items = backstage.updateQuality();
-    expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 9, quality: 2});
+  [
+    { name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 8, quality: 4},
+    { name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 6, quality: 8},
+    { name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 10, quality: 0},
+  ].forEach(item => {
+    it("should increase quality by two as the date has approaches 10 days or less", () => {
+      const backstage = new Shop([new Item(item.name, item.sellIn, item.quality)]);
+      const items = backstage.updateQuality();
+      expect(items[0]).toEqual({ name: item.name, sellIn: item.sellIn - 1, quality: item.quality + 2});
+    })
   })
 
   it("should have zero quality if the performance already end", () => {
