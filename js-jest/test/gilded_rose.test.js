@@ -23,9 +23,15 @@ describe("Aged brie", () => {
 })
 
 describe("Sulfuras, Hand of Ragnaros", () => {
-  it('should never be sold or decrease in quality', () => {
-    const sulfuras = new Shop([new Item("Sulfuras, Hand of Ragnaros", 1, 1)]);
-    const items = sulfuras.updateQuality();
-    expect(items[0]).toEqual({ name: "Sulfuras, Hand of Ragnaros", sellIn: 1, quality: 1});
+  [
+    { name: "Sulfuras, Hand of Ragnaros", sellIn: 1, quality: 1},
+    { name: "Sulfuras, Hand of Ragnaros", sellIn: 1, quality: 50},
+    { name: "Sulfuras, Hand of Ragnaros", sellIn: 1, quality: 51},
+  ].forEach(item => {
+    it('should never be sold or decrease in quality', () => {
+      const sulfuras = new Shop([item]);
+      const items = sulfuras.updateQuality();
+      expect(items[0]).toEqual({ name: "Sulfuras, Hand of Ragnaros", sellIn: item.sellIn, quality: item.quality});
+    })
   })
 })
