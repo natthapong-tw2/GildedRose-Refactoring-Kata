@@ -26,6 +26,12 @@ describe("Aged brie", () => {
     const items = ageBrie.updateQuality();
     expect(items[0]).toEqual({ name: "Aged Brie", sellIn: -1, quality: 2});
   })
+
+  it('should not increasing quality if its exceed than 50', () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 0, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual({ name: "Aged Brie", sellIn: -1, quality: 50});
+  })
 })
 
 describe("Sulfuras, Hand of Ragnaros", () => {
