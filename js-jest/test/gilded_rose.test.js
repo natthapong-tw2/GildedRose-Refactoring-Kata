@@ -55,7 +55,7 @@ describe("Backstage passes to a TAFKAL80ETC concert", () => {
     expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 9, quality: 2});
   })
 
-  it("should have zero quality if the performance alreadty end", () => {
+  it("should have zero quality if the performance already end", () => {
     const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 1)]);
     const items = backstage.updateQuality();
     expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: -1, quality: 0});
