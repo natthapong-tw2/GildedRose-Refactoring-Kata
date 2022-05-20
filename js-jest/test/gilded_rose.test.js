@@ -27,6 +27,11 @@ describe("Aged Brie increases in quality as sellIn decreases", function() {
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(12);
   })
+  it("Aged Brie quality should not increase beyond 50", function() {
+    const gildedRose = new Shop([new Item("Aged Brie", 0, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(50);
+  })
 })
 
 describe("Backstage passes quality changes based on sellIn", function() {
@@ -45,20 +50,25 @@ describe("Backstage passes quality changes based on sellIn", function() {
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(13);
   });
-  it("Backstage passes quality should be 0, if quality < 50, sellIn < 0", function() {
+  it("Backstage passes quality should be 0, if quality <= 50, sellIn <= 0", function() {
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(0);
   });
+  it("Backstage passes quality should not increase beyond 50", function() {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(50);
+  })
 });
 
 describe("All other items quality changes based on sellIn", function() {
-  it("All other items quality should -1, if quality < 50, sellIn > 0", function() {
+  it("All other items quality should -1, if quality <= 50, sellIn > 0", function() {
     const gildedRose = new Shop([new Item("foo", 1, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(9);
   });
-  it("All other items quality should -2, if quality < 50, sellIn <= 0", function() {
+  it("All other items quality should -2, if quality <= 50, sellIn <= 0", function() {
     const gildedRose = new Shop([new Item("foo", 0, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(8);
