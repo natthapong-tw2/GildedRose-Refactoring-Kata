@@ -43,9 +43,21 @@ describe("Sulfuras, Hand of Ragnaros", () => {
 })
 
 describe("Backstage passes to a TAFKAL80ETC concert", () => {
-  it("should increase quality as the date has approaches", () => {
-    const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 1, 0)]);
+  it("should increase quality by three as the date has approaches 5 days or less", () => {
+    const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 0)]);
     const items = backstage.updateQuality();
-    expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 0, quality: 3});
+    expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 4, quality: 3});
+  })
+
+  it("should increase quality by two as the date has approaches 10 days or less", () => {
+    const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 0)]);
+    const items = backstage.updateQuality();
+    expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 9, quality: 2});
+  })
+
+  it("should have zero quality if the performance alreadty end", () => {
+    const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 1)]);
+    const items = backstage.updateQuality();
+    expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: -1, quality: 0});
   })
 })
