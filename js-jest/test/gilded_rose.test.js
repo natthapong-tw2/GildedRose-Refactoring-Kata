@@ -35,3 +35,11 @@ describe("Sulfuras, Hand of Ragnaros", () => {
     })
   })
 })
+
+describe("Backstage passes to a TAFKAL80ETC concert", () => {
+  it("should increase quality as the date has approaches", () => {
+    const backstage = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 1, 0)]);
+    const items = backstage.updateQuality();
+    expect(items[0]).toEqual({ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 0, quality: 3});
+  })
+})
