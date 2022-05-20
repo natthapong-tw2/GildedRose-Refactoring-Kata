@@ -15,7 +15,7 @@ describe("Aged brie", () => {
     expect(items[0]).toEqual({ name: "Aged Brie", sellIn: 0, quality: 1});
   })
 
-  it('should increase quality to two if sell date is passed', () => {
+  it('should decrease the quality twice if the sell date was already passed', () => {
     const ageBrie = new Shop([new Item("Aged Brie", 0, 0)]);
     const items = ageBrie.updateQuality();
     expect(items[0]).toEqual({ name: "Aged Brie", sellIn: -1, quality: 2});
