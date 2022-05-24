@@ -21,13 +21,7 @@ export class GildedRose {
 
   updateQuality() {
     this.items = this.items.map(item => {
-      if (item.name != ItemName.AgedBrie && item.name != ItemName.BackstagePasses) {
-        if (item.quality > 0) {
-          if (item.name != ItemName.Sulfuras) {
-            item.quality = item.quality - 1
-          }
-        }
-      } else {
+      if (item.name == ItemName.AgedBrie || item.name == ItemName.BackstagePasses) {
         if (item.quality < 50) {
           item.quality = item.quality + 1
           if (item.name == ItemName.BackstagePasses) {
@@ -41,6 +35,12 @@ export class GildedRose {
                 item.quality = item.quality + 1
               }
             }
+          }
+        }
+      } else {
+        if (item.quality > 0) {
+          if (item.name != ItemName.Sulfuras) {
+            item.quality = item.quality - 1
           }
         }
       }
