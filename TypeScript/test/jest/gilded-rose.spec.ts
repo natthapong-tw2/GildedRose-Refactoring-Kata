@@ -7,11 +7,6 @@ enum ItemName {
 }
 
 describe('Gilded Rose', () => {
-  it('should foo', () => {
-    const gildedRose = new GildedRose([new Item('foo', 0, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).toBe('foo');
-  });
 
   it("should reduce quality by one when item is not Aged Brie, and Backstage Passes, and Sulfuras", () => {
     const gildedRose = new GildedRose([new Item('foo', 0, 1)]);
@@ -75,6 +70,36 @@ describe('Gilded Rose', () => {
 
   it("should not increase quality when item is Backstage pass, and quality = 50 whatever sell in", () => {
     const gildedRose = new GildedRose([new Item(ItemName.BackstagePasses, 10, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(50);
+  })
+
+  it("should reduce sell in by 1 when item is not Sulfuras", () => {
+    const gildedRose = new GildedRose([new Item(ItemName.BackstagePasses, 10, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).toBe(9);
+  })
+
+  it("should reduce quality by 2 when item is other item and quality more than 0 and sell in less than 0", () => {
+    const gildedRose = new GildedRose([new Item("foo", -1, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(48);
+  })
+
+  it("should not reduce quality when item is Sulfuras and sell in less than 0", () => {
+    const gildedRose = new GildedRose([new Item(ItemName.Sulfuras, -1, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(50);
+  })
+
+  it("should reduce quality to 0 when item is Backstage passes, and sell in < 0", () => {
+    const gildedRose = new GildedRose([new Item(ItemName.BackstagePasses, -1, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(0);
+  })
+
+  it("should increase quality by 1 when item quality 49 and Aged Brie and sell in is 0", () => {
+    const gildedRose = new GildedRose([new Item(ItemName.AgedBrie, 0, 49)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(50);
   })
