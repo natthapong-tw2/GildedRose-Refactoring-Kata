@@ -1,13 +1,7 @@
-import { Item, GildedRose } from '@/gilded-rose';
-
-enum ItemName {
-  AgedBrie = 'Aged Brie',
-  Sulfuras = 'Sulfuras, Hand of Ragnaros',
-  BackstagePasses = 'Backstage passes to a TAFKAL80ETC concert',
-}
+import {GildedRose, Item} from '@/gilded-rose';
+import {ItemName} from "@/item-name";
 
 describe('Gilded Rose', () => {
-
 
   describe("Other item", () => {
     it("should reduce quality by 2 when quality more than 0 and sell in less than 0", () => {
