@@ -20,8 +20,7 @@ export class GildedRose {
   }
 
   updateQuality() {
-    for (let i = 0; i < this.items.length; i++) {
-      const item = this.items[i]
+    this.items = this.items.map(item => {
       if (item.name != ItemName.AgedBrie && item.name != ItemName.BackstagePasses) {
         if (item.quality > 0) {
           if (item.name != ItemName.Sulfuras) {
@@ -65,8 +64,9 @@ export class GildedRose {
           }
         }
       }
-    }
+      return item
+    })
 
-    return this.items;
+    return this.items
   }
 }
