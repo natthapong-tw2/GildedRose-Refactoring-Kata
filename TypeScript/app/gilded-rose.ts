@@ -54,14 +54,14 @@ export class GildedRose {
           }
         }
         else {
-          if (item.name != ItemName.BackstagePasses) {
+          if (item.name == ItemName.BackstagePasses) {
+            item.quality = 0
+          } else {
             if (item.quality > 0) {
               if (item.name != ItemName.Sulfuras) {
                 item.quality = item.quality - 1
               }
             }
-          } else {
-            item.quality = 0
           }
         }
       }
