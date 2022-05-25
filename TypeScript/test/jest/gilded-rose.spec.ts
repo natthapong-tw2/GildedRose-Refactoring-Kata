@@ -2,7 +2,7 @@ import { Item, GildedRose } from '@/gilded-rose';
 
 describe('Gilded Rose', () => {
 
-  describe('Name are not "Aged Brie" and "Backstage passes to a TAFKAL80ETC concert"', () => {
+  describe('Name is "foo"', () => {
 
     it('should foo', () => {
       const gildedRose = new GildedRose([new Item('foo', 0, 0)]);
@@ -27,6 +27,13 @@ describe('Gilded Rose', () => {
       items = gildedRose.updateQuality();
       expect(items[0].name).toBe('foo');
       expect(gildedRose.items[0].quality).toBe(0);
+    });
+
+    it('should reduce both quantity and sellIn by 1 when quality is more than 50 and sellin is more than 0"', () => {
+      const gildedRose = new GildedRose([new Item('foo', 2, 51)]);
+      const items = gildedRose.updateQuality();
+      expect(gildedRose.items[0].quality).toBe(50);
+      expect(gildedRose.items[0].sellIn).toBe(1);
     });
     
   });
@@ -63,5 +70,37 @@ describe('Gilded Rose', () => {
       expect(gildedRose.items[0].quality).toBe(0);
       expect(gildedRose.items[0].sellIn).toBe(-1);
     });
+  });
+
+  describe('Name is "Sulfuras, Hand of Ragnaros"', () => {
+
+    it('should not update anything when quality is less than 50 and sellin is more than 0', () => {
+      const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 2, 1)]);
+      const items = gildedRose.updateQuality();
+      expect(gildedRose.items[0].quality).toBe(1);
+      expect(gildedRose.items[0].sellIn).toBe(2);
+    });
+
+    it('should not update anything when quality is less than 50 and sellin is less than 0', () => {
+      const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', -1, 1)]);
+      const items = gildedRose.updateQuality();
+      expect(gildedRose.items[0].quality).toBe(1);
+      expect(gildedRose.items[0].sellIn).toBe(-1);
+    });
+
+    it('should not update anything when quality is more than 50 and sellin is more than 0', () => {
+      const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 2, 51)]);
+      const items = gildedRose.updateQuality();
+      expect(gildedRose.items[0].quality).toBe(51);
+      expect(gildedRose.items[0].sellIn).toBe(2);
+    });
+
+    it('should not update anything when quality is more than 50 and sellin is less than 0', () => {
+      const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', -1, 51)]);
+      const items = gildedRose.updateQuality();
+      expect(gildedRose.items[0].quality).toBe(51);
+      expect(gildedRose.items[0].sellIn).toBe(-1);
+    });
+
   });
 });
