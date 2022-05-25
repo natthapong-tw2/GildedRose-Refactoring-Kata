@@ -21,6 +21,10 @@ export class GildedRose {
 
   updateQuality() {
     this.items = this.items.map(item => {
+      if (item.name != ItemName.Sulfuras) {
+        item.sellIn = item.sellIn - 1;
+      }
+
       if (item.name == ItemName.AgedBrie) {
         if (item.quality < 50) {
           item.quality = item.quality + 1
@@ -47,9 +51,6 @@ export class GildedRose {
             item.quality = item.quality - 1
           }
         }
-      }
-      if (item.name != ItemName.Sulfuras) {
-        item.sellIn = item.sellIn - 1;
       }
       if (item.sellIn < 0) {
         if (item.name == ItemName.AgedBrie) {
