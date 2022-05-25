@@ -35,7 +35,10 @@ export class GildedRose {
           }
         }
       } else if ( item.name == ItemName.BackstagePasses ) {
-        if (item.quality < 50) {
+        if (item.sellIn < 0) {
+          item.quality = 0
+        }
+        else if (item.quality < 50) {
           item.quality = item.quality + 1
           if (item.name == ItemName.BackstagePasses) {
             if (item.sellIn < 11) {
@@ -56,11 +59,7 @@ export class GildedRose {
             item.quality = item.quality - 1
           }
         }
-      }
-      if (item.sellIn < 0) {
-        if (item.name == ItemName.BackstagePasses) {
-          item.quality = 0
-        } else {
+        if(item.sellIn < 0) {
           if (item.quality > 0) {
             if (item.name != ItemName.Sulfuras) {
               item.quality = item.quality - 1
