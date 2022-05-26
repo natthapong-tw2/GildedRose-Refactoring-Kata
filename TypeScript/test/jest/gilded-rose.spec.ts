@@ -27,6 +27,7 @@ describe('Gilded Rose', () => {
       items = gildedRose.updateQuality();
       expect(items[0].name).toBe('foo');
       expect(gildedRose.items[0].quality).toBe(0);
+      expect(gildedRose.items[0].sellIn).toBe(-1);
     });
 
     it('should reduce both quantity and sellIn by 1 when quality is more than 50 and sellin is more than 0"', () => {
@@ -35,7 +36,8 @@ describe('Gilded Rose', () => {
       expect(gildedRose.items[0].quality).toBe(50);
       expect(gildedRose.items[0].sellIn).toBe(1);
     });
-    
+
+
   });
 
   describe('Name is "Aged Brie"', () => {
@@ -70,6 +72,20 @@ describe('Gilded Rose', () => {
       expect(gildedRose.items[0].quality).toBe(0);
       expect(gildedRose.items[0].sellIn).toBe(-1);
     });
+
+    it('should increase quantity by 1 and reduce sellIn by 1 when quality is less than 50 and sellin is more than 11"', () => {
+      const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 12, 5)]);
+      const items = gildedRose.updateQuality();
+      expect(gildedRose.items[0].quality).toBe(6);
+      expect(gildedRose.items[0].sellIn).toBe(11);
+    });
+
+    it('should increase quantity by 2 and reduce sellIn by 1 when quality is less than 50 and sellin is more than 6 and less than 11"', () => {
+      const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 8, 5)]);
+      const items = gildedRose.updateQuality();
+      expect(gildedRose.items[0].quality).toBe(7);
+      expect(gildedRose.items[0].sellIn).toBe(7);
+    });
   });
 
   describe('Name is "Sulfuras, Hand of Ragnaros"', () => {
@@ -102,5 +118,13 @@ describe('Gilded Rose', () => {
       expect(gildedRose.items[0].sellIn).toBe(-1);
     });
 
+  });
+
+  describe('Empty Item', () => {
+    it('should not do anything', () => {
+      const gildedRose = new GildedRose([]);
+      const items = gildedRose.updateQuality();
+      expect(gildedRose.items).toHaveLength(0);
+    });
   });
 });
