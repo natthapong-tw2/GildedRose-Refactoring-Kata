@@ -4,6 +4,11 @@ class Item {
     this.sellIn = sellIn;
     this.quality = quality;
   }
+
+  decreaseQuality() {
+    this.quality = this.quality - 1;
+  }
+
 }
 
 class Shop {
@@ -19,12 +24,12 @@ class Shop {
           // not legendary item
           if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
             // decrease quality
-            this.items[i].quality = this.items[i].quality - 1;
+            this.items[i].decreaseQuality();
           }
         }
       } else {
         // is brie, tickets or legendary
-        
+
         // item quality is below upper bound (cannot legendary)
         if (this.items[i].quality < 50) {
           // increase by quality
@@ -52,7 +57,7 @@ class Shop {
           if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
             if (this.items[i].quality > 0) {
               if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                this.items[i].quality = this.items[i].quality - 1;
+                this.items[i].decreaseQuality();
               }
             }
           } else {
