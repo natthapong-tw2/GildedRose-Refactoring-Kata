@@ -6,36 +6,50 @@ class Item {
   }
 }
 
-function updateAgedBrie(item) {
-  if (item.sellIn > 0) {
-    item.quality += 1;
+function updateDefaultItem({ sellIn, quality }) {
+  let newQuality;
+
+  if (sellIn > 0) {
+    newQuality = quality - 1;
   } else {
-    item.quality += 2;
+    newQuality = quality - 2;
   }
 
-  if (item.quality > 50) item.quality = 50;
+  if (newQuality < 0) newQuality = 0;
 
-  item.sellIn -= 1;
-
-  return item;
+  return { sellIn: sellIn - 1, quality: newQuality };
 }
 
-function updateBackstagePasses(item) {
-  if (item.sellIn > 10) {
-    item.quality += 1;
-  } else if (item.sellIn > 5) {
-    item.quality += 2;
-  } else if (item.sellIn > 0) {
-    item.quality += 3;
+function updateAgedBrie({ sellIn, quality }) {
+  let newQuality;
+
+  if (sellIn > 0) {
+    newQuality = quality + 1;
   } else {
-    item.quality = 0;
+    newQuality = quality + 2;
   }
 
-  if (item.quality > 50) item.quality = 50;
+  if (newQuality > 50) newQuality = 50;
 
-  item.sellIn -= 1;
+  return { sellIn: sellIn - 1, quality: newQuality };
+}
 
-  return item;
+function updateBackstagePasses({ sellIn, quality }) {
+  let newQuality;
+
+  if (sellIn > 10) {
+    newQuality = quality + 1;
+  } else if (sellIn > 5) {
+    newQuality = quality + 2;
+  } else if (sellIn > 0) {
+    newQuality = quality + 3;
+  } else {
+    newQuality = 0;
+  }
+
+  if (newQuality > 50) newQuality = 50;
+
+  return { sellIn: sellIn - 1, quality: newQuality };
 }
 
 class Shop {
@@ -45,30 +59,32 @@ class Shop {
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
       const currentItem = this.items[i];
-      if (currentItem.name === "Sulfuras, Hand of Ragnaros") return this.items;
+      const { sellIn, quality } = currentItem;
 
-      if (currentItem.name === "Aged Brie") {
-        this.items[i] = updateAgedBrie({ ...currentItem });
-        return this.items;
-      }
+      switch (currentItem.name) {
+        case "Sulfuras, Hand of Ragnaros":
+          break;
 
-      if (currentItem.name === "Backstage passes to a TAFKAL80ETC concert") {
-        this.items[i] = updateBackstagePasses({ ...currentItem });
-        return this.items;
-      }
+        case "Aged Brie":
+          this.items[i] = {
+            ...currentItem,
+            ...updateAgedBrie({ sellIn, quality })
+          };
+          break;
 
-      // more than minimum quality
-      if (currentItem.quality > 0) {
-        // decrease quality
-        currentItem.quality = currentItem.quality - 1;
-      }
+        case "Backstage passes to a TAFKAL80ETC concert":
+          this.items[i] = {
+            ...currentItem,
+            ...updateBackstagePasses({ sellIn, quality })
+          };
+          break;
 
-      currentItem.sellIn = currentItem.sellIn - 1;
-
-      if (currentItem.sellIn < 0) {
-        if (currentItem.quality > 0) {
-          currentItem.quality = currentItem.quality - 1;
-        }
+        default:
+          this.items[i] = {
+            ...currentItem,
+            ...updateDefaultItem({ sellIn, quality })
+          };
+          break;
       }
     }
 
