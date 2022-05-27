@@ -7,8 +7,31 @@ namespace GildedRoseTests
 {
     public class GildedRoseTest
     {
-        private const int NormalUpdateQuality = 1;
+        protected const int NormalUpdateQuality = 1;
+    }
+    public class GildedRoseBuilder
+    {
+        public List<Item> Items { get; set; }
 
+        public GildedRose Build()
+        {
+            return new GildedRose(new List<Item>());
+        }
+        
+        public GildedRoseBuilder WithItem(Item item)
+        {
+            if (this.Items == null)
+            {
+                this.Items = new List<Item>();                
+            }
+            this.Items.Add(item);
+
+            return this;
+        }
+    }
+
+    public class GeneralProductTests : GildedRoseTest
+    {
         [Fact]
         public void foo()
         {
@@ -32,28 +55,28 @@ namespace GildedRoseTests
         }
 
         [Fact]
-        public void GeneralProductQualityShouldDecressAsNormal()
+        public void ProductQualityShouldDecressAsNormal()
         {
             var originalQuality = 10;
             var expectedQuality = originalQuality - NormalUpdateQuality;
             var items = new List<Item> { new Item { Name = "foo", SellIn = 1, Quality = originalQuality } };
-            
+
             GildedRose app = new GildedRose(items);
             app.UpdateQuality();
-            
+
             Assert.Equal(expectedQuality, items[0].Quality);
         }
 
         [Fact]
-        public void GeneralProductWhenOverSellInDateQualityShouldDecressTwoTimesPerNormal()
+        public void GeneralProductQualityShouldBeDecressTwiceAsFastAsSellInDatePassed()
         {
             var originalQuality = 10;
             var expectedQuality = originalQuality - (2 * NormalUpdateQuality);
-            var items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 10 } };
-            
+            var items = new List<Item> { new Item { Name = "UnknownType", SellIn = -1, Quality = originalQuality } };
+
             GildedRose app = new GildedRose(items);
             app.UpdateQuality();
-            
+
             Assert.Equal(expectedQuality, items[0].Quality);
         }
 
@@ -61,20 +84,23 @@ namespace GildedRoseTests
         public void QualityOfProductsCouldNotBeNegative()
         {
             var items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-            
-            GildedRose app = new GildedRose(items);           
+
+            GildedRose app = new GildedRose(items);
             app.UpdateQuality();
-            
+
             Assert.Equal(0, items[0].Quality);
         }
+    }
 
+    public class AgedBrieProductTests : GildedRoseTest
+    {
         [Fact]
-        public void AgedBrieQualityShouldIncressWithNormalNumberOvertime()
+        public void QualityShouldIncressWithNormalNumberOvertime()
         {
             var originalQuality = 10;
             var expectedQuality = originalQuality + NormalUpdateQuality;
             var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 2, Quality = originalQuality } };
-            
+
             GildedRose app = new GildedRose(items);
             app.UpdateQuality();
 
@@ -82,21 +108,38 @@ namespace GildedRoseTests
         }
 
         [Fact]
-        public void SulfurasQualityAndSellInDateShouldShouldNotBeUpdatedOvertime()
+        public void QualityShouldIncressTwiceAsFastAsSellInDatePassed()
+        {
+            var originalQuality = 10;
+            var expectedQuality = originalQuality + (2 * NormalUpdateQuality);
+            var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = -1, Quality = originalQuality } };
+
+            GildedRose app = new GildedRose(items);
+            app.UpdateQuality();
+
+            Assert.Equal(expectedQuality, items[0].Quality);
+        }
+    }
+
+    public class SulfurasProductTests : GildedRoseTest
+    {
+        [Fact]
+        public void QualityAndSellInDateShouldShouldNotBeUpdatedOvertime()
         {
             var originalQuality = 10;
             var originalSellIn = 10;
-            var expectdQuality = 10;
-            var expectdSellIn = 10;
             var items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = originalSellIn, Quality = originalQuality } };
 
             GildedRose app = new GildedRose(items);
             app.UpdateQuality();
 
-            Assert.Equal(expectdQuality, items[0].Quality);
-            Assert.Equal(expectdSellIn, items[0].SellIn);
+            Assert.Equal(originalQuality, items[0].Quality);
+            Assert.Equal(originalSellIn, items[0].SellIn);
         }
+    }
 
+    public class BackstagePassesTests : GildedRoseTest
+    {
         [Fact]
         public void BackstagePassesThatHaveSellInMoreThanTenQualityShouldIncressOvertimeAsNormal()
         {
@@ -110,12 +153,18 @@ namespace GildedRoseTests
             Assert.Equal(expectdQuality, items[0].Quality);
         }
 
-        [Fact]
-        public void BackstagePassesThatHaveSellInLessThanTenButMoreThanFiveQualityShouldIncressTwoTimesPerNormal()
+        [Theory]
+        [InlineData(50, 1)]
+        [InlineData(11, 1)]
+        [InlineData(10, 2)]
+        [InlineData(6, 2)]
+        [InlineData(5, 3)]
+        [InlineData(1, 3)]
+        public void ShouldIncressQualityOvertimesBaseOnSellInRemainDays(int remainDays, int qualityUpdatedMultiplier)
         {
             var originalQuality = 10;
-            var expectdQuality = originalQuality + (2 * NormalUpdateQuality) ;
-            var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = originalQuality } };
+            var expectdQuality = originalQuality + (qualityUpdatedMultiplier * NormalUpdateQuality);
+            var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = remainDays, Quality = originalQuality } };
 
             GildedRose app = new GildedRose(items);
             app.UpdateQuality();
@@ -124,20 +173,7 @@ namespace GildedRoseTests
         }
 
         [Fact]
-        public void BackstagePassesThatHaveSellInButLessThanFiveQualityShouldIncressThreeTimesPerNormal()
-        {
-            var originalQuality = 10;
-            var expectdQuality = originalQuality + (3 * NormalUpdateQuality);
-            var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = originalQuality } };
-
-            GildedRose app = new GildedRose(items);
-            app.UpdateQuality();
-
-            Assert.Equal(expectdQuality, items[0].Quality);
-        }
-
-        [Fact]
-        public void BackstagePassesOverSellInDateQualityShouldBeZero()
+        public void OverSellInDateQualityShouldBeZero()
         {
             var originalQuality = 10;
             var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = originalQuality } };
@@ -147,7 +183,10 @@ namespace GildedRoseTests
 
             Assert.Equal(0, items[0].Quality);
         }
+    }
 
+    public class ConjuredTests : GildedRoseTest
+    {
         [Fact]
         public void ConjuredShouldDecressTwoTimesPerGeneral()
         {
