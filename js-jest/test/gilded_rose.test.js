@@ -199,4 +199,19 @@ describe("Shop", function() {
       expect(items[0].quality).toBe(50);
     });
   });
+
+  describe("Sulfuras, Legendary Item", () => {
+    it("'sellIn' should not change", function() {
+      const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 1, 80)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(1);
+    });
+
+    it("'quality' should not change", function() {
+      const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 1, 80)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(80);
+    });
+  });
 });
+
