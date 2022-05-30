@@ -39,10 +39,15 @@ describe("Shop", function() {
   });
 
   describe("Regular Item", () => {
-    it("'sellIn' and 'quality' should both decrease by 1 if 'sellIn' > 0 and 'quality' > 0", function() {
+    it("'sellIn' should decrease by 1", function() {
       const gildedRose = new Shop([new Item("foo", 1, 1)]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(0);
+    });
+
+    it("'quality' should decrease by 1 if 'sellIn' > 0", function() {
+      const gildedRose = new Shop([new Item("foo", 1, 1)]);
+      const items = gildedRose.updateQuality();
       expect(items[0].quality).toBe(0);
     });
 
@@ -202,16 +207,67 @@ describe("Shop", function() {
 
   describe("Sulfuras, Legendary Item", () => {
     it("'sellIn' should not change", function() {
-      const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 1, 80)]);
+      const gildedRose = new Shop([
+        new Item("Sulfuras, Hand of Ragnaros", 1, 80)
+      ]);
+
       const items = gildedRose.updateQuality();
+
       expect(items[0].sellIn).toBe(1);
     });
 
     it("'quality' should not change", function() {
-      const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 1, 80)]);
+      const gildedRose = new Shop([
+        new Item("Sulfuras, Hand of Ragnaros", 1, 80)
+      ]);
+
       const items = gildedRose.updateQuality();
+
       expect(items[0].quality).toBe(80);
     });
   });
-});
 
+  // describe("Conjured Item", () => {
+  //   it("'sellIn' should decrease by 1", function() {
+  //     const gildedRose = new Shop([new Item("Conjured", 1, 1)]);
+
+  //     const items = gildedRose.updateQuality();
+
+  //     expect(items[0].sellIn).toBe(0);
+  //   });
+
+  //   it("'sellIn' should decrease below 0", function() {
+  //     const gildedRose = new Shop([new Item("Conjured", 0, 0)]);
+
+  //     const items = gildedRose.updateQuality();
+
+  //     expect(items[0].sellIn).toBe(-1);
+  //   });
+
+  //   it("'quality' should not decrease below 0", function() {
+  //     const gildedRose = new Shop([new Item("Conjured", 1, 0)]);
+
+  //     const items = gildedRose.updateQuality();
+
+  //     expect(items[0].quality).toBe(0);
+  //   });
+
+  //   it("'quality' should decrease by 2 if 'sellIn' > 0", function() {
+  //     const gildedRose = new Shop([new Item("Conjured", 1, 2)]);
+
+  //     const items = gildedRose.updateQuality();
+
+  //     expect(items[0].sellIn).toBe(0);
+  //     expect(items[0].quality).toBe(0);
+  //   });
+
+  //   it("'quality' should decrease by 4 each day, when 'sellIn' < 0", function() {
+  //     const gildedRose = new Shop([new Item("Conjured", 0, 10)]);
+
+  //     const items = gildedRose.updateQuality();
+
+  //     expect(items[0].sellIn).toBe(-1);
+  //     expect(items[0].quality).toBe(6);
+  //   });
+  // });
+});
