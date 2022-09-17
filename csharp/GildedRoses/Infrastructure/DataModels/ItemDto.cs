@@ -10,5 +10,7 @@ namespace csharp.GildedRoses.Infrastructure.DataModels
         public int SellIn { get; set; }
         
         public int Quality { get; set; }
+        
+        public string Policy { get; set; }
     }
 }

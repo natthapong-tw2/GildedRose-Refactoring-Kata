@@ -10,11 +10,8 @@ namespace csharp.GildedRoses
     {
         public override void Load()
         {
-            Bind<AgedBrieUpdater>().ToSelf().InSingletonScope();
-            Bind<BackstagePassesUpdater>().ToSelf().InSingletonScope();
-            Bind<SulfurasUpdater>().ToSelf().InSingletonScope();
-            Bind<StandardItemUpdater>().ToSelf().InSingletonScope();
             Bind<GildedRose>().ToSelf().InSingletonScope();
+            
             Bind<IItemRepository>().To<ItemRepository>().InSingletonScope();
             Bind<ItemsReader>().ToSelf().InSingletonScope();
         }

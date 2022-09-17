@@ -55,15 +55,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationBootstrapper.cs" />
+    <Compile Include="GildedRoses\Domain\BusinessModels\AgedBrie.cs" />
+    <Compile Include="GildedRoses\Domain\BusinessModels\BackstagePasses.cs" />
     <Compile Include="GildedRoses\Domain\BusinessModels\Item.cs" />
     <Compile Include="GildedRoses\Domain\BusinessModels\Quality.cs" />
+    <Compile Include="GildedRoses\Domain\BusinessModels\StandardItem.cs" />
+    <Compile Include="GildedRoses\Domain\BusinessModels\Sulfuras.cs" />
     <Compile Include="GildedRoses\Domain\Repositories\IItemRepository.cs" />
     <Compile Include="GildedRoses\Domain\Services\GildedRose.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\AgedBrieUpdater.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\BackstagePassesUpdater.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\IITemUpdater.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\StandardItemUpdater.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\SulfurasUpdater.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Policies\Cold\AgedBriePolicy.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Policies\Cold\BackstagePassesPolicy.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Policies\Cold\StandardItemPolicy.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Policies\Hot\AgedBriePolicy.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Policies\Hot\BackstagePassesPolicy.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Policies\Hot\StandardItemPolicy.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Policies\IPolicy.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Policies\Policy.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Policies\SulfurasPolicy.cs" />
     <Compile Include="GildedRoses\GildedRoseModule.cs" />
     <Compile Include="GildedRoses\Infrastructure\DataModels\ItemDto.cs" />
     <Compile Include="GildedRoses\Infrastructure\DataModels\ItemsDto.cs" />

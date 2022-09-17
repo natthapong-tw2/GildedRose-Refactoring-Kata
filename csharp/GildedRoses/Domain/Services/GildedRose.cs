@@ -1,29 +1,14 @@
-﻿using System.Collections.Generic;
-using csharp.GildedRoses.Domain.Repositories;
+﻿using csharp.GildedRoses.Domain.Repositories;
 
 namespace csharp.GildedRoses.Domain.Services
 {
     public class GildedRose
     {
         private readonly IItemRepository itemRepository;
-        
-        private readonly IList<IITemUpdater> updaters;
-        
-        public GildedRose(
-            AgedBrieUpdater agedBrieUpdater,
-            BackstagePassesUpdater backstagePassesUpdater,
-            SulfurasUpdater sulfurasUpdater,
-            StandardItemUpdater standardItemUpdater,
-            IItemRepository itemRepository)
+
+        public GildedRose(IItemRepository itemRepository)
         {
             this.itemRepository = itemRepository;
-            updaters = new List<IITemUpdater>
-            {
-                agedBrieUpdater,
-                backstagePassesUpdater,
-                sulfurasUpdater,
-                standardItemUpdater
-            };
         }
 
         public void UpdateQuality()
@@ -31,14 +16,7 @@ namespace csharp.GildedRoses.Domain.Services
             var items = itemRepository.GetAll();
             foreach (var item in items)
             {
-                foreach (var updater in updaters)
-                {
-                    if (updater.IsSatisfiedBy(item))
-                    {
-                        updater.UpdateQuality(item);
-                        break;
-                    }
-                }
+                item.updateUsing();
             }
         }
     }

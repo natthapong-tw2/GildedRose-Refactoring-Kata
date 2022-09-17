@@ -1,10 +1,10 @@
 using csharp.GildedRoses.Domain.BusinessModels;
 
-namespace csharp.GildedRoses.Domain.Services
+namespace csharp.GildedRoses.Domain.Services.Policies.Cold
 {
-    public class BackstagePassesUpdater : IITemUpdater
+    public class BackstagePassesPolicy : Policy
     {
-        public void UpdateQuality(Item item)
+        public override void UpdateQuality(Item item)
         {
             item.SellIn -= 1;
 
@@ -25,13 +25,13 @@ namespace csharp.GildedRoses.Domain.Services
                 item.Quality.IncreaseBy(2);
                 return;
             }
-            
+
             item.Quality.Increase();
         }
 
-        public bool IsSatisfiedBy(Item item)
+        public override bool isEligibleFor(string name, string policyName)
         {
-            return item.Name == "Backstage passes to a TAFKAL80ETC concert";
+            return name.StartsWith("Backstage passes") && policyName.Equals("Cold");
         }
     }
 }

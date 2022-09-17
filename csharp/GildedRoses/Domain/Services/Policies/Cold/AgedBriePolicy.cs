@@ -1,10 +1,10 @@
 using csharp.GildedRoses.Domain.BusinessModels;
 
-namespace csharp.GildedRoses.Domain.Services
+namespace csharp.GildedRoses.Domain.Services.Policies.Cold
 {
-    public class AgedBrieUpdater : IITemUpdater
+    public class AgedBriePolicy : Policy
     {
-        public void UpdateQuality(Item item)
+        public override void UpdateQuality(Item item)
         {
             item.SellIn -= 1;
 
@@ -17,9 +17,9 @@ namespace csharp.GildedRoses.Domain.Services
             item.Quality.IncreaseBy(1);
         }
 
-        public bool IsSatisfiedBy(Item item)
+        public override bool isEligibleFor(string name, string policyName)
         {
-            return item.Name == "Aged Brie";
+            return name.Equals("Aged Brie") && policyName.Equals("Cold");
         }
     }
 }

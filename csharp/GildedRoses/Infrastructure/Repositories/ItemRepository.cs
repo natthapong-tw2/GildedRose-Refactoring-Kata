@@ -41,6 +41,7 @@ namespace csharp.GildedRoses.Infrastructure.Repositories
                     .WithName(item.Name)
                     .WithSellIn(item.SellIn)
                     .WithQuality(item.Quality)
+                    .WithPolicy(item.Policy)
                     .Get())
                 .ToList();
         }

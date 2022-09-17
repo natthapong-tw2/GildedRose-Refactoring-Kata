@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using csharp.GildedRoses.Domain.BusinessModels;
-using csharp.GildedRoses.Domain.Repositories;
 using csharp.GildedRoses.Domain.Services;
 using csharp.GildedRoses.Infrastructure.Repositories;
 using Ninject;
