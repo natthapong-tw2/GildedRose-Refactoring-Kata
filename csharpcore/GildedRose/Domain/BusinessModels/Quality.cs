@@ -1,6 +1,6 @@
 using System;
 
-namespace GildedRose.Domain.BusinessModels
+namespace SafetyNet.GildedRose.Domain.BusinessModels
 {
     public class Quality : IEquatable<Quality>, IComparable<Quality>
     {

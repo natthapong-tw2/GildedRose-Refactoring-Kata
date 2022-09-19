@@ -3,7 +3,8 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
-        <StartupObject>GildedRoseTests.TexttestFixture</StartupObject>
+        <StartupObject>SafetyNet.GildedRoseTests.TexttestFixture</StartupObject>
+        <RootNamespace>SafetyNet.GildedRoseTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

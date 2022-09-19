@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using GildedRose.Domain.BusinessModels;
-using GildedRose.Infrastructure.Repositories;
 using Ninject;
+using SafetyNet.GildedRose.Domain.BusinessModels;
 
-namespace GildedRose
+namespace SafetyNet.GildedRose
 {
     public class Program
     {

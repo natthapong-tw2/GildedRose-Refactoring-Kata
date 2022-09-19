@@ -1,10 +1,10 @@
-using GildedRose.Domain.Repositories;
-using GildedRose.Domain.Services.Updaters;
-using GildedRose.Infrastructure.DataReaders;
-using GildedRose.Infrastructure.Repositories;
 using Ninject.Modules;
+using SafetyNet.GildedRose.Domain.Repositories;
+using SafetyNet.GildedRose.Domain.Services.Updaters;
+using SafetyNet.GildedRose.Infrastructure.DataReaders;
+using SafetyNet.GildedRose.Infrastructure.Repositories;
 
-namespace GildedRose
+namespace SafetyNet.GildedRose
 {
     public class GildedRoseModule : NinjectModule
     {

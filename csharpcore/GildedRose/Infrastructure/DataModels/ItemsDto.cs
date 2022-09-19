@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GildedRose.Infrastructure.DataModels
+namespace SafetyNet.GildedRose.Infrastructure.DataModels
 {
     [Serializable]
     public class ItemsDto

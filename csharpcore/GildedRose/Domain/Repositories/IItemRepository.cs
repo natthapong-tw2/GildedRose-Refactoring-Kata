@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using GildedRose.Domain.BusinessModels;
+using SafetyNet.GildedRose.Domain.BusinessModels;
 
-namespace GildedRose.Domain.Repositories
+namespace SafetyNet.GildedRose.Domain.Repositories
 {
     public interface IItemRepository
     {

@@ -1,6 +1,6 @@
-using GildedRose.Domain.BusinessModels;
+using SafetyNet.GildedRose.Domain.BusinessModels;
 
-namespace GildedRose.Domain.Services.Updaters
+namespace SafetyNet.GildedRose.Domain.Services.Updaters
 {
     public class BackstagePassesUpdater : IITemUpdater
     {

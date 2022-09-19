@@ -1,6 +1,6 @@
 using Ninject;
 
-namespace GildedRose
+namespace SafetyNet.GildedRose
 {
     public class ApplicationBootstrapper
     {

@@ -1,9 +1,9 @@
 using System.IO;
 using FluentAssertions;
-using GildedRose.Infrastructure.DataReaders;
 using NUnit.Framework;
+using SafetyNet.GildedRose.Infrastructure.DataReaders;
 
-namespace GildedRoseTests.Infrastructure
+namespace SafetyNet.GildedRoseTests.Infrastructure
 {
     public class ItemsReaderTests
     {

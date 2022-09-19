@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using GildedRose.Domain.BusinessModels;
-using GildedRose.Domain.Repositories;
-using GildedRose.Infrastructure.DataReaders;
+using SafetyNet.GildedRose.Domain.BusinessModels;
+using SafetyNet.GildedRose.Domain.Repositories;
+using SafetyNet.GildedRose.Infrastructure.DataReaders;
 
-namespace GildedRose.Infrastructure.Repositories
+namespace SafetyNet.GildedRose.Infrastructure.Repositories
 {
     public class ItemRepository : IItemRepository
     {

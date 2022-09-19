@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using GildedRose;
-using GildedRose.Domain.BusinessModels;
-using GildedRose.Infrastructure.Repositories;
 using Ninject;
+using SafetyNet.GildedRose;
+using SafetyNet.GildedRose.Domain.BusinessModels;
 
-namespace GildedRoseTests
+namespace SafetyNet.GildedRoseTests
 {
     public static class TexttestFixture
     {

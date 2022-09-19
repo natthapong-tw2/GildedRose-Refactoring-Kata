@@ -1,4 +1,4 @@
-﻿namespace GildedRose.Domain.BusinessModels
+﻿namespace SafetyNet.GildedRose.Domain.BusinessModels
 {
     public class Item
     {

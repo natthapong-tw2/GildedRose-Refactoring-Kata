@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using GildedRose.Domain.Repositories;
-using GildedRose.Domain.Services.Updaters;
+using SafetyNet.GildedRose.Domain.Repositories;
+using SafetyNet.GildedRose.Domain.Services.Updaters;
 
-namespace GildedRose.Domain.Services
+namespace SafetyNet.GildedRose.Domain.Services
 {
     public class GildedRose
     {

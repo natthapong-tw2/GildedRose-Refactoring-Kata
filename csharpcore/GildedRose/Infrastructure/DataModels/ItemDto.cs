@@ -1,6 +1,6 @@
 using System;
 
-namespace GildedRose.Infrastructure.DataModels
+namespace SafetyNet.GildedRose.Infrastructure.DataModels
 {
     [Serializable]
     public class ItemDto

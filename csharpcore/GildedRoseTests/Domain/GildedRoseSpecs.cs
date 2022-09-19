@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using GildedRose;
-using GildedRose.Domain.BusinessModels;
-using GildedRose.Domain.Repositories;
-using GildedRose.Infrastructure.DataModels;
-using GildedRose.Infrastructure.DataReaders;
 using Ninject;
 using NSubstitute;
 using NUnit.Framework;
+using SafetyNet.GildedRose;
+using SafetyNet.GildedRose.Domain.BusinessModels;
+using SafetyNet.GildedRose.Domain.Repositories;
+using SafetyNet.GildedRose.Infrastructure.DataModels;
+using SafetyNet.GildedRose.Infrastructure.DataReaders;
 
-namespace GildedRoseTests.Domain
+namespace SafetyNet.GildedRoseTests.Domain
 {
     [TestFixture]
     public class GildedRoseSpecs 

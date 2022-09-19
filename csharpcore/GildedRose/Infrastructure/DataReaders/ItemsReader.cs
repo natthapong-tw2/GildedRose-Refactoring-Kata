@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using GildedRose.Infrastructure.DataModels;
 using Newtonsoft.Json;
+using SafetyNet.GildedRose.Infrastructure.DataModels;
 
-namespace GildedRose.Infrastructure.DataReaders
+namespace SafetyNet.GildedRose.Infrastructure.DataReaders
 {
     public class ItemsReader
     {

@@ -1,6 +1,6 @@
-using GildedRose.Domain.BusinessModels;
+using SafetyNet.GildedRose.Domain.BusinessModels;
 
-namespace GildedRose.Infrastructure.Repositories
+namespace SafetyNet.GildedRose.Infrastructure.Repositories
 {
     public class ItemFactory
     {
