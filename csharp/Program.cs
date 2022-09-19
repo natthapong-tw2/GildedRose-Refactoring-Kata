@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using csharp.GildedRoses.Domain.BusinessModels;
+using csharp.GildedRoses.Domain.Services;
+using csharp.GildedRoses.Infrastructure.Repositories;
+using Ninject;
 
 namespace csharp
 {
@@ -9,47 +13,30 @@ namespace csharp
         {
             Console.WriteLine("OMGHAI!");
 
-            IList<Item> Items = new List<Item>{
-                new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
-                new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
-                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
-                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80},
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    SellIn = 15,
-                    Quality = 20
-                },
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    SellIn = 10,
-                    Quality = 49
-                },
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    SellIn = 5,
-                    Quality = 49
-                },
-				// this conjured item does not work properly yet
-				new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
-            };
-
-            var app = new GildedRose(Items);
-
-
-            for (var i = 0; i < 31; i++)
+            var appContainer = new ApplicationBootstrapper().InitContainer();
+            var app = appContainer.TryGet<GildedRose>();
+            var itemRepository = appContainer.TryGet<ItemRepository>();
+            
+            for (var day = 0; day < 31; day++)
             {
-                Console.WriteLine("-------- day " + i + " --------");
-                Console.WriteLine("name, sellIn, quality");
-                for (var j = 0; j < Items.Count; j++)
-                {
-                    System.Console.WriteLine(Items[j]);
-                }
-                Console.WriteLine("");
+                PrintItemsOnDay(itemRepository.GetAll(), day);
                 app.UpdateQuality();
+            }
+        }
+
+        private static void PrintItemsOnDay(IReadOnlyList<Item> items, int i)
+        {
+            Console.WriteLine("-------- day " + i + " --------");
+            Console.WriteLine("name, sellIn, quality");
+            PrintAllItems(items);
+            Console.WriteLine("");
+        }
+
+        private static void PrintAllItems(IReadOnlyList<Item> items)
+        {
+            foreach (var item in items)
+            {
+                Console.WriteLine(item);
             }
         }
     }
