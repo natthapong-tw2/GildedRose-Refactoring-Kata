@@ -15,6 +15,13 @@ namespace csharp.Test
             item.Should().NotBeNull();
         }
         
+        [Test]
+        public void ShouldCreateAgedBrie_WhenNameIsAgedBrie()
+        {
+            var item = ItemFactory.Create().WithName("Aged Brie").Get();
+            item.Should().BeOfType<AgedBrie>();
+        }
+        
         [TestCase("anExpectedName")]
         [TestCase("anOtherExpectedName")]
         public void ShouldCreateItemWithCorrectName(string expectedName)

@@ -15,6 +15,16 @@ namespace csharp.GildedRoses.Infrastructure.Repositories
 
         public Item Get()
         {
+            if (name != null && name.Equals("Aged Brie"))
+            {
+                return new AgedBrie
+                {
+                    Name = name,
+                    SellIn = sellIn,
+                    Quality = quality
+                };
+            }
+            
             return new Item
             {
                 Name = name,

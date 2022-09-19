@@ -1,4 +1,6 @@
-﻿namespace csharp.GildedRoses.Domain.BusinessModels
+﻿using csharp.GildedRoses.Domain.Services;
+
+namespace csharp.GildedRoses.Domain.BusinessModels
 {
     public class Item
     {
@@ -10,6 +12,20 @@
         public override string ToString()
         {
             return $"{Name}, {SellIn}, {Quality}";
-        }  
+        }
+
+        public virtual bool UpdateQualityUsing(ByBranchUpdater byBranchUpdater)
+        {
+            return false;
+        }
+    }
+
+    public class AgedBrie : Item
+    {
+        public override bool UpdateQualityUsing(ByBranchUpdater byBranchUpdater)
+        {
+            byBranchUpdater.UpdateQuality(this);
+            return true;
+        }
     }
 }

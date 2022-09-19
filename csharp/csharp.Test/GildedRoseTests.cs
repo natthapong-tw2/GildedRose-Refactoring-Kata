@@ -14,6 +14,7 @@ namespace csharp.Test
         private Mock<BackstagePassesUpdater> backstagePassesUpdaterMock;
         private Mock<SulfurasUpdater> sulfurasUpdaterMock;
         private Mock<StandardItemUpdater> standardItemUpdaterMock;
+        private Mock<ByBranchUpdater> byBranchUpdaterMock;
         private Mock<IItemRepository> itemRepositoryMock;
 
         private GildedRose testable;
@@ -25,13 +26,13 @@ namespace csharp.Test
             backstagePassesUpdaterMock = new Mock<BackstagePassesUpdater>();
             sulfurasUpdaterMock = new Mock<SulfurasUpdater>();
             standardItemUpdaterMock = new Mock<StandardItemUpdater>();
+            byBranchUpdaterMock = new Mock<ByBranchUpdater>();
             itemRepositoryMock = new Mock<IItemRepository>();
             
-            testable = new GildedRose(
-                agedBrieUpdaterMock.Object, 
-                backstagePassesUpdaterMock.Object, 
+            testable = new GildedRose(backstagePassesUpdaterMock.Object, 
                 sulfurasUpdaterMock.Object,
                 standardItemUpdaterMock.Object, 
+                byBranchUpdaterMock.Object,
                 itemRepositoryMock.Object);
         }
 
@@ -48,17 +49,16 @@ namespace csharp.Test
         }
 
         [Test]
-        public void ShouldUseAgedBrieUpdaterIfTheItemIsAgedBrie()
+        public void ShouldUseByBranchUpdaterIfTheItemIsAgedBrie()
         {
-            var item = new Item();
-            itemRepositoryMock.Setup(x => x.GetAll()).Returns(new List<Item> { item });
+            var agedBrie = new AgedBrie();
+            itemRepositoryMock.Setup(x => x.GetAll()).Returns(new List<Item> { agedBrie });
             
-            agedBrieUpdaterMock.Setup(x => x.IsSatisfiedBy(item)).Returns(true);
-            agedBrieUpdaterMock.Setup(x => x.UpdateQuality(item)).Verifiable();
+            byBranchUpdaterMock.Setup(x => x.UpdateQuality(agedBrie)).Verifiable();
             
             testable.UpdateQuality();
 
-            agedBrieUpdaterMock.Verify(x => x.UpdateQuality(item), Times.Once);
+            byBranchUpdaterMock.Verify(x => x.UpdateQuality(agedBrie), Times.Once);
         }
         
         [Test]

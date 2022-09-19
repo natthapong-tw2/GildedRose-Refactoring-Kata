@@ -5,21 +5,23 @@ namespace csharp.GildedRoses.Domain.Services
 {
     public class GildedRose
     {
+        private readonly ByBranchUpdater byBranchUpdater;
         private readonly IItemRepository itemRepository;
         
         private readonly IList<IITemUpdater> updaters;
         
-        public GildedRose(AgedBrieUpdater agedBrieUpdater,
+        public GildedRose(
             BackstagePassesUpdater backstagePassesUpdater,
             SulfurasUpdater sulfurasUpdater,
             StandardItemUpdater standardItemUpdater,
+            ByBranchUpdater byBranchUpdater,
             IItemRepository itemRepository)
         {
+            this.byBranchUpdater = byBranchUpdater;
             this.itemRepository = itemRepository;
             updaters = new List<IITemUpdater>
             {
                 // Be aware that order matters, is it covered ?
-                agedBrieUpdater,
                 backstagePassesUpdater,
                 sulfurasUpdater,
                 standardItemUpdater
@@ -35,6 +37,8 @@ namespace csharp.GildedRoses.Domain.Services
                 {
                     continue;
                 }
+
+                item.UpdateQualityUsing(byBranchUpdater);
                 
                 foreach (var updater in updaters)
                 {

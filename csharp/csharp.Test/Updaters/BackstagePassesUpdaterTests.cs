@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace csharp.Test
 {
     [TestFixture]
-    public class BackstagePassesTests : UpdaterTestsBase
+    public class BackstagePassesUpdaterTests : UpdaterTestsBase
     {
         [SetUp]
         public void SetUp()

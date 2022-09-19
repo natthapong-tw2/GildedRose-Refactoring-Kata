@@ -77,6 +77,7 @@
     <Compile Include="GildedRoses\Domain\Services\GildedRose.cs" />
     <Compile Include="GildedRoses\Domain\Services\Updaters\AgedBrieUpdater.cs" />
     <Compile Include="GildedRoses\Domain\Services\Updaters\BackstagePassesUpdater.cs" />
+    <Compile Include="GildedRoses\Domain\Services\Updaters\ByBranchUpdater.cs" />
     <Compile Include="GildedRoses\Domain\Services\Updaters\IITemUpdater.cs" />
     <Compile Include="GildedRoses\Domain\Services\Updaters\StandardItemUpdater.cs" />
     <Compile Include="GildedRoses\Domain\Services\Updaters\SulfurasUpdater.cs" />
