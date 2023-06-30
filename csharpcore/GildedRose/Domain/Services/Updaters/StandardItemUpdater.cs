@@ -1,0 +1,25 @@
+using GildedRose.Domain.BusinessModels;
+
+namespace GildedRose.Domain.Services.Updaters
+{
+    public class StandardItemUpdater : IITemUpdater
+    {
+        public void UpdateQuality(Item item)
+        {
+            item.SellIn -= 1;
+
+            if (item.SellIn < 0)
+            {
+                item.Quality.DecreaseBy(2);
+                return;
+            }
+            
+            item.Quality.Decrease();
+        }
+
+        public bool IsSatisfiedBy(Item item)
+        {
+            return true;
+        }
+    }
+}

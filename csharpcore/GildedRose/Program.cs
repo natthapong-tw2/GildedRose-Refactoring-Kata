@@ -1,31 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using GildedRose;
 using GildedRose.Domain.BusinessModels;
 using GildedRose.Infrastructure.Repositories;
 using Ninject;
 
-namespace GildedRoseTests
+namespace GildedRose
 {
-    public static class TexttestFixture
+    public class Program
     {
         public static void Main(string[] args)
         {
             Console.WriteLine("OMGHAI!");
 
             var appContainer = new ApplicationBootstrapper().InitContainer();
-            var app = appContainer.TryGet<GildedRose.Domain.Services.GildedRose>();
+            var app = appContainer.TryGet<Domain.Services.GildedRose>();
             var itemRepository = app.ItemRepository;
             
-            int days = 2;
-            if (args.Length > 0)
+            for (var day = 0; day < 31; day++)
             {
-                days = int.Parse(args[0]) + 1;
-            }
-
-            for (var i = 0; i < days; i++)
-            {
-                PrintItemsOnDay(itemRepository.GetAll(), i);
+                PrintItemsOnDay(itemRepository.GetAll(), day);
                 app.UpdateQuality();
             }
         }
