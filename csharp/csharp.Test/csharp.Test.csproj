@@ -20,13 +20,4 @@
       <ProjectReference Include="..\csharp.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="correctItems.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Include="withParseErrorItems.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-
 </Project>

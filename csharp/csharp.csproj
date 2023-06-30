@@ -54,39 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationBootstrapper.cs" />
-    <Compile Include="GildedRoses\Domain\BusinessModels\Item.cs" />
-    <Compile Include="GildedRoses\Domain\BusinessModels\Quality.cs" />
-    <Compile Include="GildedRoses\Domain\Repositories\IItemRepository.cs" />
-    <Compile Include="GildedRoses\Domain\Services\GildedRose.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\AgedBrieUpdater.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\BackstagePassesUpdater.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\IITemUpdater.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\StandardItemUpdater.cs" />
-    <Compile Include="GildedRoses\Domain\Services\Updaters\SulfurasUpdater.cs" />
-    <Compile Include="GildedRoses\GildedRoseModule.cs" />
-    <Compile Include="GildedRoses\Infrastructure\DataModels\ItemDto.cs" />
-    <Compile Include="GildedRoses\Infrastructure\DataModels\ItemsDto.cs" />
-    <Compile Include="GildedRoses\Infrastructure\DataReaders\ItemsReader.cs" />
-    <Compile Include="GildedRoses\Infrastructure\Repositories\ItemFactory.cs" />
-    <Compile Include="GildedRoses\Infrastructure\Repositories\ItemRepository.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GildedRoses\Domain" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="items.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
