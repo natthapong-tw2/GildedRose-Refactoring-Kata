@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Runtime.CompilerServices;
+using System.Collections;
 using System.Security.AccessControl;
 using System.Collections.Generic;
 using GildedRoseKata;
@@ -125,6 +126,90 @@ namespace GildedRoseTests
                     Assert.That(sulfurasItem.Quality, Is.EqualTo(expectedQuality));
                 }
             }
+
+            [TestFixture]
+            public class ForEachAgedBrieItem
+            {
+                [TestCase(-1, 1, -1)]
+                [TestCase(0, 2, -1)]
+                [TestCase(48, 50, -1)]
+                [TestCase(-1, 1, 0)]
+                [TestCase(0, 2, 0)]
+                [TestCase(48, 50, 0)]
+                public void ShouldIncreaseQualityBy2(
+                    int currentQuality,
+                    int expectedQuality,
+                    int currentSellIn
+                )
+                {
+                    var agedBrieItem = new Item
+                    {
+                        Name = "Aged Brie",
+                        Quality = currentQuality,
+                        SellIn = currentSellIn
+                    };
+
+                    IList<Item> items = new List<Item> { agedBrieItem };
+
+                    new GildedRose(items).UpdateQuality();
+
+                    Assert.That(agedBrieItem.Quality, Is.EqualTo(expectedQuality));
+                }
+
+                [TestCase(49, 50, 1)]
+                [TestCase(49, 50, -1)]
+                [TestCase(49, 50, 0)]
+                public void ShouldIncreaseQualityBy1(
+                    int currentQuality,
+                    int expectedQuality,
+                    int currentSellIn
+                )
+                {
+                    var agedBrieItem = new Item
+                    {
+                        Name = "Aged Brie",
+                        Quality = currentQuality,
+                        SellIn = currentSellIn
+                    };
+
+                    IList<Item> items = new List<Item> { agedBrieItem };
+
+                    new GildedRose(items).UpdateQuality();
+
+                    Assert.That(agedBrieItem.Quality, Is.EqualTo(expectedQuality));
+                }
+
+                [TestCase(50, 50, -1)]
+                [TestCase(50, 50, 0)]
+                [TestCase(50, 50, 1)]
+                public void ShouldNotIncreaseQuality(
+                    int currentQuality,
+                    int expectedQuality,
+                    int currentSellIn
+                )
+                {
+                    var agedBrieItem = new Item
+                    {
+                        Name = "Aged Brie",
+                        Quality = currentQuality,
+                        SellIn = currentSellIn
+                    };
+
+                    IList<Item> items = new List<Item> { agedBrieItem };
+
+                    new GildedRose(items).UpdateQuality();
+
+                    Assert.That(agedBrieItem.Quality, Is.EqualTo(expectedQuality));
+                }
+            }
+
+            // [TestFixture]
+            // public class ForEachBackStagePassesItem
+            // {
+            //     public void ShouldIncreaseQualite(){
+
+            //     }
+            // }
         }
     }
 }
