@@ -203,13 +203,124 @@ namespace GildedRoseTests
                 }
             }
 
-            // [TestFixture]
-            // public class ForEachBackStagePassesItem
-            // {
-            //     public void ShouldIncreaseQualite(){
+            [TestFixture]
+            public class ForEachBackStagePassesItem
+            {
+                [TestCase(49, 50, 11)] // Q<50 && S>=11
+                public void ShouldIncreaseQualiteBy1(
+                    int currentQuality,
+                    int expectedQuality,
+                    int currentSellIn
+                ){
+                    var backStagePassesItem = new Item{
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Quality = currentQuality,
+                        SellIn = currentSellIn
+                    };
 
-            //     }
-            // }
+                    IList<Item> items = new List<Item> { backStagePassesItem };
+
+                    new GildedRose(items).UpdateQuality();
+
+                    Assert.That(backStagePassesItem.Quality, Is.EqualTo(expectedQuality));
+                }
+
+                [TestCase(48, 50, 5)]
+                [TestCase(45, 47, 6)] // (Q<50 && Q>=48) || (Q<50 && S>=6)
+                public void ShouldIncreaseQualiteBy2(
+                    int currentQuality,
+                    int expectedQuality,
+                    int currentSellIn
+                ){
+                    var backStagePassesItem = new Item{
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Quality = currentQuality,
+                        SellIn = currentSellIn
+                    };
+
+                    IList<Item> items = new List<Item> { backStagePassesItem };
+
+                    new GildedRose(items).UpdateQuality();
+
+                    Assert.That(backStagePassesItem.Quality, Is.EqualTo(expectedQuality));
+                }
+
+                [TestCase(47, 50, 5)] // Q<50 && Q+2<50 && S<6
+                public void ShouldIncreaseQualiteBy3(
+                    int currentQuality,
+                    int expectedQuality,
+                    int currentSellIn
+                ){
+                    var backStagePassesItem = new Item{
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Quality = currentQuality,
+                        SellIn = currentSellIn
+                    };
+
+                    IList<Item> items = new List<Item> { backStagePassesItem };
+
+                    new GildedRose(items).UpdateQuality();
+
+                    Assert.That(backStagePassesItem.Quality, Is.EqualTo(expectedQuality));
+                }
+
+                [TestCase(50, 50, 5)] // Q>=50
+                public void ShouldNotIncreaseQualite(
+                    int currentQuality,
+                    int expectedQuality,
+                    int currentSellIn
+                ){
+                    var backStagePassesItem = new Item{
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Quality = currentQuality,
+                        SellIn = currentSellIn
+                    };
+
+                    IList<Item> items = new List<Item> { backStagePassesItem };
+
+                    new GildedRose(items).UpdateQuality();
+
+                    Assert.That(backStagePassesItem.Quality, Is.EqualTo(expectedQuality));
+                }
+
+                [TestCase(50, 0, 0)]
+                [TestCase(45, 0, -1)] //S<1
+                public void ShouldDropQualiteto0(
+                    int currentQuality,
+                    int expectedQuality,
+                    int currentSellIn
+                ){
+                    var backStagePassesItem = new Item{
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Quality = currentQuality,
+                        SellIn = currentSellIn
+                    };
+
+                    IList<Item> items = new List<Item> { backStagePassesItem };
+
+                    new GildedRose(items).UpdateQuality();
+
+                    Assert.That(backStagePassesItem.Quality, Is.EqualTo(expectedQuality));
+                }
+
+                [TestCase(50, 49)]
+                [TestCase(45, 44)]
+                public void ShouldDecreaseSellIn(
+                    int currentSellIn,
+                    int expectedSellIn
+                ){
+                    var backStagePassesItem = new Item{
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        SellIn = currentSellIn
+                    };
+
+                    IList<Item> items = new List<Item> { backStagePassesItem };
+
+                    new GildedRose(items).UpdateQuality();
+
+                    Assert.That(backStagePassesItem.SellIn, Is.EqualTo(expectedSellIn));
+                }
+            }
         }
     }
 }
