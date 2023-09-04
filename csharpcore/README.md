@@ -41,3 +41,6 @@ dotnet GildedRoseTests/bin/Debug/net6.0/GildedRoseTests.dll {10}
 ### 6. Quality never decrease bellow 0  [    ]
 
 ### 7. Add a new conjured item          [    ]
+
+Next Tasks:
+1. Use JSON data to replace the items

@@ -321,6 +321,36 @@ namespace GildedRoseTests
                     Assert.That(backStagePassesItem.SellIn, Is.EqualTo(expectedSellIn));
                 }
             }
+
+            [TestFixture]
+            public class ForStandardItemQualityOver50
+            {
+                [TestCase(50, 49, 10)]
+                [TestCase(50, 48, -1)]
+                [TestCase(50, 48, 0)]
+                public void ShouldNotUpdateQuality(
+                    int currentQuality,
+                    int expectedQuality,
+                    int sellIn
+                )
+                {
+                    // Arrange
+                    var standardItem = new Item
+                    {
+                        Name = "Standard item",
+                        Quality = currentQuality,
+                        SellIn = sellIn
+                    };
+                    IList<Item> items = new List<Item> { standardItem };
+
+                    // Act
+                    new GildedRose(items).UpdateQuality();
+
+                    // Assert
+                    Assert.That(standardItem.Quality, Is.EqualTo(expectedQuality));
+                }
+                
+            }
         }
     }
 }
