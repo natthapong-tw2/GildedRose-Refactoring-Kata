@@ -136,7 +136,7 @@ namespace GildedRoseTests
                 [TestCase(-1, 1, 0)]
                 [TestCase(0, 2, 0)]
                 [TestCase(48, 50, 0)]
-                public void ShouldIncreaseQualityBy2(
+                public void ShouldIncreaseQualityBy2(  //Q<49 && S<1
                     int currentQuality,
                     int expectedQuality,
                     int currentSellIn
@@ -159,7 +159,9 @@ namespace GildedRoseTests
                 [TestCase(49, 50, 1)]
                 [TestCase(49, 50, -1)]
                 [TestCase(49, 50, 0)]
-                public void ShouldIncreaseQualityBy1(
+                [TestCase(40, 41, 1)]
+                [TestCase(40, 41, 10)]
+                public void ShouldIncreaseQualityBy1( // (Q<49 && S>=1) || Q=49
                     int currentQuality,
                     int expectedQuality,
                     int currentSellIn
@@ -182,7 +184,7 @@ namespace GildedRoseTests
                 [TestCase(50, 50, -1)]
                 [TestCase(50, 50, 0)]
                 [TestCase(50, 50, 1)]
-                public void ShouldNotIncreaseQuality(
+                public void ShouldNotIncreaseQuality( // Q>=50
                     int currentQuality,
                     int expectedQuality,
                     int currentSellIn
