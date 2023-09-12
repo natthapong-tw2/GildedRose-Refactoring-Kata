@@ -227,7 +227,7 @@ namespace GildedRoseTests
 
                 [TestCase(48, 50, 5)]
                 [TestCase(45, 47, 6)] // (Q<50 && Q>=48) || (Q<50 && S>=6)
-                public void ShouldIncreaseQualiteBy2(
+                public void ShouldIncreaseQualityBy2(
                     int currentQuality,
                     int expectedQuality,
                     int currentSellIn
