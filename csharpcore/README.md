@@ -32,15 +32,15 @@ dotnet GildedRoseTests/bin/Debug/net6.0/GildedRoseTests.dll {10}
 
 ### 2. Dexterity                        [ OK ]
 
-### 3. AgedBrie                         [    ]
+### 3. AgedBrie                         [  TBC  ]
 
-### 4. BackStagePasses                  [    ]
+### 4. BackStagePasses                  [  TBC  ]
 
-### 5. Quality never update over 50     [    ]
+### 5. Quality never update over 50     [ TBC ]
 
-### 6. Quality never decrease bellow 0  [    ]
+### 6. Quality never decrease bellow 0  [  TBC  ]
 
-### 7. Add a new conjured item          [    ]
+### 7. Add a new conjured item          [  TBC  ]
 
 Next Tasks:
 1. Use JSON data to replace the items
