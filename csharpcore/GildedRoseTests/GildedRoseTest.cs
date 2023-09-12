@@ -381,6 +381,30 @@ namespace GildedRoseTests
                 }
                 
             }
+            
+            [Ignore("Waiting for the implementation")]
+            [TestFixture]
+            public class ForEachConjuredItem
+            {
+                [TestCase(10, 8)]
+                [TestCase(0, -2)]
+                public void ShouldDecreaseQuality(int currentQuality, int expectedQuality)
+                {
+                    // Arrange
+                    var conjuredItem = new Item
+                    {
+                        Name = "Conjured",
+                        SellIn = currentQuality
+                    };
+                    IList<Item> items = new List<Item> { conjuredItem };
+
+                    // Act
+                    new GildedRose(items).UpdateQuality();
+
+                    // Assert
+                    Assert.That(conjuredItem.SellIn, Is.EqualTo(expectedQuality));
+                }
+            }
         }
     }
 }
