@@ -15,6 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose", "IsolatedGilde
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRoseTests", "IsolatedGildedRoseTests \GildedRoseTests.csproj", "{1E049E7C-44E8-4CF5-B5AA-FD4F0C165BA5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assignement", "Assignement", "{6D733519-F569-484A-B4A9-095FE24A097A}"
+	ProjectSection(SolutionItems) = preProject
+		Assignement\README.md = Assignement\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
