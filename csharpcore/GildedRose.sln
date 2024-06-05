@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assignement", "Assignement", "{6D733519-F569-484A-B4A9-095FE24A097A}"
 	ProjectSection(SolutionItems) = preProject
 		Assignement\README.md = Assignement\README.md
+		Assignement\Rules.md = Assignement\Rules.md
 	EndProjectSection
 EndProject
 Global

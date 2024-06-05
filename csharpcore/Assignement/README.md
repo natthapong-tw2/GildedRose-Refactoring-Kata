@@ -1,4 +1,4 @@
-﻿# Experiment how the tests can impact the refactoring a way or another
+﻿# Experiment how the tests can impact the refactoring
 
 ### Goal
 Try to refactor all updaters into one in both projects:
